@@ -31,6 +31,7 @@ from InvenTree.filters import (
     InvenTreeDateFilter,
     InvenTreeSearchFilter,
 )
+from common.api import OrderedSearchFilter
 from InvenTree.helpers import isNull, str2bool
 from InvenTree.mixins import (
     CreateAPI,
@@ -1369,8 +1370,7 @@ class PartList(PartMixin, BulkUpdateMixin, DataExportViewMixin, ListCreateAPI):
 
         return queryset
 
-    filter_backends = SEARCH_ORDER_FILTER_ALIAS
-
+    filter_backends = [OrderedSearchFilter]
     ordering_fields = [
         'name',
         'creation_date',

@@ -20,6 +20,7 @@ from djmoney.contrib.exchange.models import ExchangeBackend, Rate
 from drf_spectacular.utils import OpenApiResponse, extend_schema
 from error_report.models import Error
 from pint._typing import UnitLike
+from rest_framework import SearchFilter
 from rest_framework import serializers
 from rest_framework.exceptions import NotAcceptable, NotFound, PermissionDenied
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
@@ -1116,3 +1117,21 @@ admin_api_urls = [
     path('config/', ConfigList.as_view(), name='api-config-list'),
     path('config/<str:key>/', ConfigDetail.as_view(), name='api-config-detail'),
 ]
+
+class OrderedSearchFilter(SearchFilter):
+    """
+    Custom search filter that orders queryset based on the ordering of search_fields.
+    """
+
+    def filter_queryset(self, request, queryset, view):
+        queryset = super().filter_queryset(request, queryset, view)
+
+        search_fields = getattr(view, 'search_fields', [])
+        if search_fields:
+            try:
+                queryset = queryset.order_by(*search_fields)
+            except Exception:
+                # Fall back gracefully if ordering fails
+                pass
+
+        return queryset
