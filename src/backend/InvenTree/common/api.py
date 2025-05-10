@@ -1121,6 +1121,7 @@ class OrderedSearchFilter(SearchFilter):
     """Custom search filter that orders queryset based on the ordering of search_fields."""
 
     def filter_queryset(self, request, queryset, view):
+        """Filter and order the queryset based on search terms and defined search fields."""
         queryset = super().filter_queryset(request, queryset, view)
 
         search_fields = getattr(view, 'search_fields', [])
