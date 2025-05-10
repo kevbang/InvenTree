@@ -1118,6 +1118,7 @@ admin_api_urls = [
     path('config/<str:key>/', ConfigDetail.as_view(), name='api-config-detail'),
 ]
 
+
 class OrderedSearchFilter(SearchFilter):
     """Custom search filter that orders queryset based on the ordering of search_fields."""
 
