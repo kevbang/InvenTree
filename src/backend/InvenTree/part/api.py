@@ -21,6 +21,7 @@ import order.models
 import part.filters
 from build.models import Build, BuildItem
 from build.status_codes import BuildStatusGroups
+from common.api import OrderedSearchFilter
 from data_exporter.mixins import DataExportViewMixin
 from InvenTree.api import BulkUpdateMixin, ListCreateDestroyAPIView, MetadataView
 from InvenTree.filters import (
@@ -31,7 +32,6 @@ from InvenTree.filters import (
     InvenTreeDateFilter,
     InvenTreeSearchFilter,
 )
-from common.api import OrderedSearchFilter
 from InvenTree.helpers import isNull, str2bool
 from InvenTree.mixins import (
     CreateAPI,
