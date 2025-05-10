@@ -1118,8 +1118,7 @@ admin_api_urls = [
 ]
 
 class OrderedSearchFilter(SearchFilter):
-    """Custom search filter that orders queryset based on the ordering of search_fields.
-    """
+    """Custom search filter that orders queryset based on the ordering of search_fields."""
 
     def filter_queryset(self, request, queryset, view):
         queryset = super().filter_queryset(request, queryset, view)
@@ -1131,5 +1130,4 @@ class OrderedSearchFilter(SearchFilter):
             except Exception:
                 # Fall back gracefully if ordering fails
                 pass
-
         return queryset
