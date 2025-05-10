@@ -21,6 +21,7 @@ import order.models
 import part.filters
 from build.models import Build, BuildItem
 from build.status_codes import BuildStatusGroups
+from common.api import OrderedSearchFilter
 from data_exporter.mixins import DataExportViewMixin
 from InvenTree.api import BulkUpdateMixin, ListCreateDestroyAPIView, MetadataView
 from InvenTree.filters import (
@@ -1369,8 +1370,7 @@ class PartList(PartMixin, BulkUpdateMixin, DataExportViewMixin, ListCreateAPI):
 
         return queryset
 
-    filter_backends = SEARCH_ORDER_FILTER_ALIAS
-
+    filter_backends = [OrderedSearchFilter]
     ordering_fields = [
         'name',
         'creation_date',
